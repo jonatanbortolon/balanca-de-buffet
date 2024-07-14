@@ -1,0 +1,47 @@
+<main>
+  <mat-toolbar>
+    <span>Multipedidos</span>
+  </mat-toolbar>
+
+  <div class="w-full p-4">
+  
+    <mat-card appearance="outlined">
+      <mat-card-content class="space-x-4">
+        
+        <mat-card-title>Configurações da balança</mat-card-title>
+        
+        <mat-form-field>
+          <mat-label>Porta de comunicação</mat-label>
+          <input matInput placeholder="Ex. COM4" [value]="config.path" (change)="onSerialConfigPathChange($event)">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Taxa de transmissão</mat-label>
+          <input matInput type="number" placeholder="Ex. 9600" [value]="config.baudRate" (change)="onSerialConfigBaudRateChange($event)">
+        </mat-form-field>
+
+        <mat-form-field>  
+          <mat-label>Bits de dados</mat-label>
+          <mat-select [value]="config.dataBits" (selectionChange)="onserialConfigDataBitsChange($event)">
+            @for (bits of [8, 5, 6, 7]; track bits) {
+              <mat-option [value]="bits">{{bits}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Bits de parada</mat-label>
+          <mat-select [value]="config.stopBits" (selectionChange)="onSerialConfigStopBitsChange($event)">
+            @for (bits of [1, 1.5, 2]; track bits) {
+              <mat-option [value]="bits">{{bits}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</main>
+
+<router-outlet />
