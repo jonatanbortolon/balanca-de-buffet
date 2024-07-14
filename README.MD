@@ -10,7 +10,7 @@ Em seguida copie o arquivo .env.example para .env e preencha as informações ca
 
 Logo após rode o comando ```npm run dev``` para iniciar o servidor de desenvolvimento.
 
-Assim que o backend estiver rodando, abra o diretório da pasta frontend e rode o comando ```npm run dev``` para iniciar o frontend.
+Assim que o backend estiver rodando, abra o diretório da pasta frontend e rode o comando ```npm start``` para iniciar o frontend.
 
 ## Featrures
     - Aguado de estabilização da balança
