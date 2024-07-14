@@ -1,11 +1,8 @@
 import "dotenv/config";
 import { SerialPort } from "serialport";
 import { Server } from "socket.io";
-import { WEIGHT_RESULT } from "./enums/weight-result";
 import { ClientToServerEvents, ServerToClientEvents } from "./types/socket-io";
-import { formatBalanceWeight } from "./utils/format-balance-weight";
-import { getWeightData } from "./utils/get-weight-data";
-import { weightType } from "./utils/weight-type";
+import { setupSerial } from "./utils/setup-serial";
 
 const PORT = parseInt(process.env.PORT || "3000");
 
@@ -17,6 +14,8 @@ let serialPort = new SerialPort({
 });
 
 const io = new Server<ClientToServerEvents, ServerToClientEvents>(PORT);
+
+setupSerial(serialPort, io);
 
 io.on("connection", (socket) => {
   console.log("Connection", socket.id);
@@ -38,6 +37,8 @@ io.on("connection", (socket) => {
       dataBits: data.dataBits,
     });
 
+    setupSerial(serialPort, io);
+
     socket.emit("serialConfig", {
       path: data.path,
       baudRate: data.baudRate,
@@ -45,34 +46,4 @@ io.on("connection", (socket) => {
       dataBits: data.dataBits,
     });
   });
-});
-
-serialPort.on("error", (err) => {
-  console.log("Error: ", err.message);
-});
-
-let stabilityTimeout: NodeJS.Timeout;
-
-serialPort.on("data", (buffer) => {
-  if (stabilityTimeout) {
-    clearTimeout(stabilityTimeout);
-  }
-
-  stabilityTimeout = setTimeout(() => {
-    const type = weightType(buffer);
-
-    if (type !== WEIGHT_RESULT.OK) {
-      console.log("Invalid weight: ", type);
-
-      return;
-    }
-
-    const weigth = formatBalanceWeight(buffer);
-
-    console.log("Weigth: ", weigth);
-
-    const data = getWeightData(weigth);
-
-    io.emit("weight", data);
-  }, 1000);
 });
