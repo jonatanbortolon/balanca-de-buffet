@@ -12,7 +12,7 @@ Logo após rode o comando ```npm run dev``` para iniciar o servidor de desenvolv
 
 Assim que o backend estiver rodando, abra o diretório da pasta frontend e rode o comando ```npm start``` para iniciar o frontend.
 
-## Featrures
+## Funcionalidades
     - Aguardo de estabilização da balança
     - Configuraçao da conexao serial pelo frontend
     - Dados do pedido do prato em tempo real
