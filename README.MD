@@ -1,6 +1,6 @@
 # Balança de Buffet
 
-App para medir o peso de pratos por "buffet por quilo" e "buffet livre" utilizando uma balança com conexão serial.
+App para medir o peso de pratos por "buffet por quilo" e "buffet livre" utilizando uma balança com conexão serial com protocolo Filizola/Toledo.
 
 ## Rodando o projeto
 
