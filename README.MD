@@ -18,6 +18,7 @@ Assim que o backend estiver rodando, abra o diretório da pasta frontend e rode 
     - Dados do pedido do prato em tempo real
 
 ## Funcionalidades futuras
+    - Integração com mais protocolos de balanças
     - Utilização de banco de dados
     - Integração com o maquininha de pagamento
     - Permitir a integração de outras ferramentas (Ex. webhook, api.)
